@@ -7,13 +7,13 @@
 export const API_BASE_URL: string =
   import.meta.env.PROD || import.meta.env.VITE_DEV_REMOTE === 'remote'
     ? `${import.meta.env.VITE_BACKEND_SERVER}api/`
-    : 'https://work-1-hoawaswwbhuszcua.prod-runtime.all-hands.dev/api/';
+    : 'https://work-1-hoawaswwbhuszcua.prod-runtime.all-hands.dev:12010/api/';
 
 // Base URL for the backend server
 export const BASE_URL: string =
   import.meta.env.PROD || import.meta.env.VITE_DEV_REMOTE
     ? import.meta.env.VITE_BACKEND_SERVER as string
-    : 'https://work-1-hoawaswwbhuszcua.prod-runtime.all-hands.dev/';
+    : 'https://work-1-hoawaswwbhuszcua.prod-runtime.all-hands.dev:12010/';
 
 // Website URL for the frontend
 export const WEBSITE_URL: string = import.meta.env.PROD

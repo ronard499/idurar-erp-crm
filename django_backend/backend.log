@@ -1,4 +1,1 @@
 Watching for file changes with StatReloader
-[02/Jul/2025 13:04:07] "POST /api/login HTTP/1.1" 200 563
-Not Found: /
-[02/Jul/2025 13:06:57] "GET / HTTP/1.1" 404 2679
