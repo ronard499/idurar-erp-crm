@@ -7,13 +7,13 @@
 export const API_BASE_URL: string =
   import.meta.env.PROD || import.meta.env.VITE_DEV_REMOTE === 'remote'
     ? `${import.meta.env.VITE_BACKEND_SERVER}api/`
-    : 'https://work-1-hoawaswwbhuszcua.prod-runtime.all-hands.dev:12010/api/auth/';
+    : 'http://localhost:12010/api/auth/';
 
 // Base URL for the backend server
 export const BASE_URL: string =
   import.meta.env.PROD || import.meta.env.VITE_DEV_REMOTE
     ? import.meta.env.VITE_BACKEND_SERVER as string
-    : 'https://work-1-hoawaswwbhuszcua.prod-runtime.all-hands.dev:12010/';
+    : 'http://localhost:12010/';
 
 // Website URL for the frontend
 export const WEBSITE_URL: string = import.meta.env.PROD
@@ -24,7 +24,7 @@ export const WEBSITE_URL: string = import.meta.env.PROD
 export const DOWNLOAD_BASE_URL: string =
   import.meta.env.PROD || import.meta.env.VITE_DEV_REMOTE
     ? `${import.meta.env.VITE_BACKEND_SERVER}media/`
-    : 'https://work-1-hoawaswwbhuszcua.prod-runtime.all-hands.dev/media/';
+    : 'http://localhost/media/';
 
 // Name of the access token stored in localStorage
 export const ACCESS_TOKEN_NAME: string = 'x-auth-token';
