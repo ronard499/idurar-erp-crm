@@ -1,7 +1,14 @@
 import { notification } from 'antd';
 import codeMessage from './codeMessage';
+import { ApiResponse } from '@/types';
+import { ErrorHandlerParams } from './types';
 
-const errorHandler = (error) => {
+/**
+ * Handle API request errors
+ * @param error - Error object from axios
+ * @returns API response with error information
+ */
+const errorHandler = (error: ErrorHandlerParams): ApiResponse => {
   if (!navigator.onLine) {
     notification.config({
       duration: 15,
