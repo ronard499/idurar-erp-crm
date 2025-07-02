@@ -1,0 +1,3 @@
+Watching for file changes with StatReloader
+[02/Jul/2025 12:23:16] "POST /api/login HTTP/1.1" 200 563
+[02/Jul/2025 12:25:19] "POST /api/login HTTP/1.1" 200 563

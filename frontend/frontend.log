@@ -1,0 +1,12 @@
+
+> idurar-erp-crm@4.1.0 dev
+> vite --port 12001 --host 0.0.0.0
+
+Port 12001 is in use, trying another one...
+Port 12002 is in use, trying another one...
+
+  VITE v5.4.8  ready in 191 ms
+
+  ➜  Local:   http://localhost:12003/
+  ➜  Network: http://10.2.55.10:12003/
+  ➜  press h + enter to show help
