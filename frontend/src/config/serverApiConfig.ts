@@ -7,7 +7,7 @@
 export const API_BASE_URL: string =
   import.meta.env.PROD || import.meta.env.VITE_DEV_REMOTE === 'remote'
     ? `${import.meta.env.VITE_BACKEND_SERVER}api/`
-    : 'https://work-1-hoawaswwbhuszcua.prod-runtime.all-hands.dev:12010/api/';
+    : 'https://work-1-hoawaswwbhuszcua.prod-runtime.all-hands.dev:12010/api/auth/';
 
 // Base URL for the backend server
 export const BASE_URL: string =
@@ -18,7 +18,7 @@ export const BASE_URL: string =
 // Website URL for the frontend
 export const WEBSITE_URL: string = import.meta.env.PROD
   ? 'http://cloud.idurarapp.com/'
-  : 'http://localhost:12001/';
+  : 'http://localhost:12009/';
 
 // Base URL for downloading files
 export const DOWNLOAD_BASE_URL: string =

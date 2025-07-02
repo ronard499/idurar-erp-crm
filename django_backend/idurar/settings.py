@@ -36,7 +36,26 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 
-INSTALLED_APPS = [
+SHARED_APPS = (
+    'django_tenants',  # mandatory
+    'tenant',  # tenant app
+    
+    # Django apps
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    
+    # Third-party apps
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'corsheaders',
+)
+
+TENANT_APPS = (
+    # Django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,9 +70,15 @@ INSTALLED_APPS = [
     
     # Local apps
     'api',
-]
+)
+
+INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
+
+TENANT_MODEL = "tenant.Client"  # app.Model
+TENANT_DOMAIN_MODEL = "tenant.Domain"  # app.Model
 
 MIDDLEWARE = [
+    'django_tenants.middleware.main.TenantMainMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -65,6 +90,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'idurar.urls'
+PUBLIC_SCHEMA_URLCONF = 'idurar.public_urls'
 
 TEMPLATES = [
     {
@@ -83,16 +109,53 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'idurar.wsgi.application'
 
+# Django Tenants Configuration
+TENANT_CREATION_FAKES_MIGRATIONS = True
+DATABASE_ROUTERS = (
+    'django_tenants.routers.TenantSyncRouter',
+)
+
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django_tenants.postgresql_backend',
+        'NAME': os.getenv('DB_NAME', 'idurar'),
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'postgres'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
+
+# For SQLite fallback during development
+if os.getenv('USE_SQLITE', 'False') == 'True':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+    # Disable tenant-specific settings when using SQLite
+    MIDDLEWARE = [m for m in MIDDLEWARE if m != 'django_tenants.middleware.main.TenantMainMiddleware']
+    MIDDLEWARE.insert(0, 'django.middleware.security.SecurityMiddleware')
+    DATABASE_ROUTERS = []
+    INSTALLED_APPS = [
+        'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+        'rest_framework',
+        'rest_framework_simplejwt',
+        'corsheaders',
+        'tenant',
+        'api',
+    ]
+    ROOT_URLCONF = 'idurar.urls_sqlite'
 
 
 # Password validation
@@ -142,6 +205,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom user model
 AUTH_USER_MODEL = 'api.Admin'
+
+# Authentication backends
+AUTHENTICATION_BACKENDS = [
+    'api.backends.BcryptBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 # REST Framework settings
 REST_FRAMEWORK = {

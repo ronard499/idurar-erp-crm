@@ -10,11 +10,11 @@ import datetime
 import json
 
 from .models import (
-    Admin, Client, PaymentMode, Product, Quote, QuoteItem,
+    Admin, Customer, PaymentMode, Product, Quote, QuoteItem,
     Invoice, InvoiceItem, Payment, Setting
 )
 from .serializers import (
-    AdminSerializer, AdminCreateSerializer, ClientSerializer,
+    AdminSerializer, AdminCreateSerializer, CustomerSerializer,
     PaymentModeSerializer, ProductSerializer, QuoteSerializer,
     QuoteCreateSerializer, InvoiceSerializer, InvoiceCreateSerializer,
     PaymentSerializer, PaymentCreateSerializer, SettingSerializer
@@ -209,46 +209,46 @@ def search_items(request, model, serializer_class, search_fields):
         'message': f"Search results for {model.__name__}",
     }, status=status.HTTP_200_OK)
 
-# Client views
+# Customer views (renamed from Client)
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def create_client(request):
-    return create_item(request, Client, ClientSerializer)
+    return create_item(request, Customer, CustomerSerializer)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def read_client(request, id):
-    return read_item(request, id, Client, ClientSerializer)
+    return read_item(request, id, Customer, CustomerSerializer)
 
 @api_view(['PATCH'])
 @permission_classes([IsAuthenticated])
 def update_client(request, id):
-    return update_item(request, id, Client, ClientSerializer)
+    return update_item(request, id, Customer, CustomerSerializer)
 
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 def delete_client(request, id):
-    return delete_item(request, id, Client, ClientSerializer)
+    return delete_item(request, id, Customer, CustomerSerializer)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def list_clients(request):
-    return list_items(request, Client, ClientSerializer, ['name', 'email', 'phone'])
+    return list_items(request, Customer, CustomerSerializer, ['name', 'email', 'phone'])
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def list_all_clients(request):
-    return list_all_items(request, Client, ClientSerializer)
+    return list_all_items(request, Customer, CustomerSerializer)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def filter_clients(request):
-    return filter_items(request, Client, ClientSerializer)
+    return filter_items(request, Customer, CustomerSerializer)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def search_clients(request):
-    return search_items(request, Client, ClientSerializer, ['name', 'email', 'phone'])
+    return search_items(request, Customer, CustomerSerializer, ['name', 'email', 'phone'])
 
 # PaymentMode views
 @api_view(['POST'])
@@ -516,14 +516,14 @@ def search_payments(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def client_summary(request):
-    total_clients = Client.objects.filter(removed=False).count()
+    total_clients = Customer.objects.filter(removed=False).count()
     
     return Response({
         'success': True,
         'result': {
             'total': total_clients,
         },
-        'message': 'Client summary retrieved successfully',
+        'message': 'Customer summary retrieved successfully',
     }, status=status.HTTP_200_OK)
 
 @api_view(['GET'])

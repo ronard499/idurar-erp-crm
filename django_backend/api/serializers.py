@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import (
-    Admin, AdminPassword, Client, PaymentMode, Product, 
+    Admin, AdminPassword, Customer, PaymentMode, Product, 
     Quote, QuoteItem, Invoice, InvoiceItem, Payment, Setting
 )
 from django.contrib.auth.hashers import make_password
@@ -31,12 +31,12 @@ class AdminCreateSerializer(serializers.ModelSerializer):
         
         return admin
 
-class ClientSerializer(serializers.ModelSerializer):
+class CustomerSerializer(serializers.ModelSerializer):
     created_by_name = serializers.SerializerMethodField()
     assigned_name = serializers.SerializerMethodField()
     
     class Meta:
-        model = Client
+        model = Customer
         fields = ['id', 'name', 'phone', 'country', 'address', 'email', 
                   'created_by', 'created_by_name', 'assigned', 'assigned_name', 
                   'enabled', 'removed', 'created', 'updated']

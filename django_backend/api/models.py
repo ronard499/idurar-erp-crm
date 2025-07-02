@@ -57,7 +57,10 @@ class AdminPassword(models.Model):
     def __str__(self):
         return f"Password info for {self.user.email}"
 
-class Client(models.Model):
+class Customer(models.Model):
+    """
+    Renamed from Client to avoid confusion with tenant.Client
+    """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
     phone = models.CharField(max_length=50, blank=True)
@@ -65,8 +68,8 @@ class Client(models.Model):
     address = models.TextField(blank=True)
     email = models.EmailField(blank=True)
     
-    created_by = models.ForeignKey(Admin, on_delete=models.SET_NULL, null=True, related_name='created_clients')
-    assigned = models.ForeignKey(Admin, on_delete=models.SET_NULL, null=True, related_name='assigned_clients')
+    created_by = models.ForeignKey(Admin, on_delete=models.SET_NULL, null=True, related_name='created_customers')
+    assigned = models.ForeignKey(Admin, on_delete=models.SET_NULL, null=True, related_name='assigned_customers')
     
     enabled = models.BooleanField(default=True)
     removed = models.BooleanField(default=False)
@@ -117,7 +120,7 @@ class Quote(models.Model):
     year = models.IntegerField()
     date = models.DateField()
     expiry_date = models.DateField(null=True, blank=True)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='quotes')
+    client = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='quotes')
     
     sub_total = models.DecimalField(max_digits=15, decimal_places=2, default=0)
     tax_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)
@@ -160,7 +163,7 @@ class Invoice(models.Model):
     year = models.IntegerField()
     date = models.DateField()
     expiry_date = models.DateField(null=True, blank=True)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='invoices')
+    client = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='invoices')
     
     sub_total = models.DecimalField(max_digits=15, decimal_places=2, default=0)
     tax_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)
@@ -208,7 +211,7 @@ class Payment(models.Model):
     
     payment_mode = models.ForeignKey(PaymentMode, on_delete=models.SET_NULL, null=True)
     invoice = models.ForeignKey(Invoice, on_delete=models.CASCADE, related_name='payments')
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='payments')
+    client = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='payments')
     
     note = models.TextField(blank=True)
     ref = models.CharField(max_length=100, blank=True)

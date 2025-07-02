@@ -12,7 +12,7 @@
  Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩`
 ```
 
-IDURAR is Open Source ERP / CRM (Invoice / Quote / Accounting ) Based on Django (Python) with SQLite and React.js with Ant Design (AntD) and Redux
+IDURAR is Open Source ERP / CRM (Invoice / Quote / Accounting ) Based on Django (Python) with SQLite and React.js with TypeScript, Tailwind CSS, Ant Design (AntD) and Redux
 
 </div>
 
@@ -81,27 +81,33 @@ IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / 
    cd django_backend
    ```
 
-2. Install dependencies:
+2. Create a virtual environment:
+   ```
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. Install dependencies:
    ```
    pip install -r requirements.txt
    ```
 
-3. Run migrations:
+4. Apply migrations:
    ```
    python manage.py migrate
    ```
 
-4. Setup initial data:
+5. Create a superuser:
    ```
-   python manage.py setup
-   ```
-
-5. Start the server:
-   ```
-   ./start_server.sh
+   python create_superuser.py
    ```
 
-The backend will be available at http://localhost:12000/api/
+6. Start the development server:
+   ```
+   python manage.py runserver 0.0.0.0:12010
+   ```
+
+The backend will be available at http://localhost:12010/api/
 
 ### Frontend
 
@@ -117,14 +123,14 @@ The backend will be available at http://localhost:12000/api/
 
 3. Start the development server:
    ```
-   npm run dev -- --port 12001 --host 0.0.0.0
+   npm run dev -- --port 12009 --host 0.0.0.0
    ```
 
-The frontend will be available at http://localhost:12001/
+The frontend will be available at http://localhost:12009/
 
 ## Default Admin User
 
-- Email: admin@demo.com
+- Email: admin@example.com
 - Password: admin123
 
 ## API Endpoints
