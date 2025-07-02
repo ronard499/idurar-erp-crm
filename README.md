@@ -12,7 +12,7 @@
  Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩`
 ```
 
-IDURAR is Open Source ERP / CRM (Invoice / Quote / Accounting ) Based on Advanced Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
+IDURAR is Open Source ERP / CRM (Invoice / Quote / Accounting ) Based on Django (Python) with SQLite and React.js with TypeScript, Tailwind CSS, Ant Design (AntD) and Redux
 
 </div>
 
@@ -69,28 +69,94 @@ Based on Mern Stack (Node.js / Express.js / MongoDb / React.js ) 👨‍💻
 
 ## Free Open Source ERP / CRM App
 
-IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Mern Stack (Node.js / Express.js / MongoDb / React.js ) with Ant Design (AntD) and Redux
+IDURAR is Open "Fair-Code" Source ERP / CRM (Invoice / Inventory / Accounting / HR) Based on Django (Python) with SQLite and React.js with Ant Design (AntD) and Redux
 
 
 ## Getting started
 
-1.[Clone the repository](INSTALLATION-INSTRUCTIONS.md#step-1-clone-the-repository)
+### Backend
 
-2.[Create Your MongoDB Account and Database Cluster](INSTALLATION-INSTRUCTIONS.md#Step-2-Create-Your-MongoDB-Account-and-Database-Cluster)
+1. Navigate to the Django backend directory:
+   ```
+   cd django_backend
+   ```
 
-3.[Edit the Environment File](INSTALLATION-INSTRUCTIONS.md#Step-3-Edit-the-Environment-File)
+2. Create a virtual environment:
+   ```
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-4.[Update MongoDB URI](INSTALLATION-INSTRUCTIONS.md#Step-4-Update-MongoDB-URI)
+3. Install dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
 
-5.[Install Backend Dependencies](INSTALLATION-INSTRUCTIONS.md#Step-5-Install-Backend-Dependencies)
+4. Apply migrations:
+   ```
+   python manage.py migrate
+   ```
 
-6.[Run Setup Script](INSTALLATION-INSTRUCTIONS.md#Step-6-Run-Setup-Script)
+5. Create a superuser:
+   ```
+   python create_superuser.py
+   ```
 
-7.[Run the Backend Server](INSTALLATION-INSTRUCTIONS.md#Step-7-Run-the-Backend-Server)
+6. Start the development server:
+   ```
+   python manage.py runserver 0.0.0.0:12010
+   ```
 
-8.[Install Frontend Dependencies](INSTALLATION-INSTRUCTIONS.md#Step-8-Install-Frontend-Dependencies)
+The backend will be available at http://localhost:12010/api/
 
-9.[Run the Frontend Server](INSTALLATION-INSTRUCTIONS.md#Step-9-Run-the-Frontend-Server)
+### Frontend
+
+1. Navigate to the frontend directory:
+   ```
+   cd frontend
+   ```
+
+2. Install dependencies:
+   ```
+   npm install
+   ```
+
+3. Start the development server:
+   ```
+   npm run dev -- --port 12009 --host 0.0.0.0
+   ```
+
+The frontend will be available at http://localhost:12009/
+
+## Default Admin User
+
+- Email: admin@example.com
+- Password: admin123
+
+## API Endpoints
+
+### Authentication
+
+- `POST /api/login` - Login
+- `POST /api/logout` - Logout
+- `POST /api/forgetpassword` - Request password reset
+- `POST /api/resetpassword` - Reset password
+
+### Clients, Invoices, Quotes, Payments
+
+The API follows a consistent pattern for all entities:
+
+- `POST /api/{entity}/create` - Create entity
+- `GET /api/{entity}/read/:id` - Get entity by ID
+- `PATCH /api/{entity}/update/:id` - Update entity
+- `DELETE /api/{entity}/delete/:id` - Delete entity
+- `GET /api/{entity}/list` - Get paginated list of entities
+- `GET /api/{entity}/listAll` - Get all entities
+- `GET /api/{entity}/filter` - Filter entities
+- `GET /api/{entity}/search` - Search entities
+- `GET /api/{entity}/summary` - Get entity summary (where applicable)
+
+Where `{entity}` can be: `client`, `invoice`, `quote`, `payment`, `product`, `paymentMode`
 
 ## Contributing
 

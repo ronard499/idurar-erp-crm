@@ -1,8 +1,17 @@
 import { notification } from 'antd';
-
+import { AxiosResponse } from 'axios';
 import codeMessage from './codeMessage';
+import { RequestHandlerOptions } from './types';
 
-const successHandler = (response, options = { notifyOnSuccess: false, notifyOnFailed: true }) => {
+/**
+ * Handle successful API responses
+ * @param response - Axios response object
+ * @param options - Options for notification behavior
+ */
+const successHandler = (
+  response: AxiosResponse, 
+  options: RequestHandlerOptions = { notifyOnSuccess: false, notifyOnFailed: true }
+): void => {
   const { data } = response;
   if (data && data.success === true) {
     const message = response.data && data.message;

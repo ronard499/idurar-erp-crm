@@ -1,0 +1,40 @@
+Watching for file changes with StatReloader
+[02/Jul/2025 12:23:16] "POST /api/login HTTP/1.1" 200 563
+[02/Jul/2025 12:25:19] "POST /api/login HTTP/1.1" 200 563
+Not Found: /
+[02/Jul/2025 12:30:28] "GET / HTTP/1.1" 404 2679
+Not Found: /
+[02/Jul/2025 12:40:31] "GET / HTTP/1.1" 404 2679
+Not Found: /
+[02/Jul/2025 12:42:42] "GET / HTTP/1.1" 404 2679
+Not Found: /api/
+[02/Jul/2025 12:42:49] "GET /api/ HTTP/1.1" 404 19827
+Not Found: /favicon.ico
+[02/Jul/2025 12:42:53] "GET /favicon.ico HTTP/1.1" 404 2730
+Not Found: /
+[02/Jul/2025 12:53:44] "GET / HTTP/1.1" 404 2679
+Not Found: /
+[02/Jul/2025 12:53:51] "GET / HTTP/1.1" 404 2679
+Not Found: /
+[02/Jul/2025 12:54:05] "GET / HTTP/1.1" 404 2679
+Not Found: /
+[02/Jul/2025 12:54:31] "GET / HTTP/1.1" 404 2679
+Not Found: /
+[02/Jul/2025 12:56:23] "GET / HTTP/1.1" 404 2679
+Not Found: /
+[02/Jul/2025 12:56:40] "GET / HTTP/1.1" 404 2679
+Not Found: /
+[02/Jul/2025 12:58:04] "GET / HTTP/1.1" 404 2679
+Not Found: /
+[02/Jul/2025 12:58:38] "GET / HTTP/1.1" 404 2679
+Not Found: /
+[02/Jul/2025 12:59:57] "GET / HTTP/1.1" 404 2679
+[02/Jul/2025 13:00:18] "POST /api/login HTTP/1.1" 200 563
+Operations to perform:
+  Apply all migrations: admin, api, auth, contenttypes, sessions
+Running migrations:
+  No migrations to apply.
+Starting setup...
+Default admin user already exists
+Default settings created
+Setup completed successfully
