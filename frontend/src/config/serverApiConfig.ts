@@ -18,7 +18,7 @@ export const BASE_URL: string =
 // Website URL for the frontend
 export const WEBSITE_URL: string = import.meta.env.PROD
   ? 'http://cloud.idurarapp.com/'
-  : 'http://localhost:12013/';
+  : 'http://localhost:12014/';
 
 // Base URL for downloading files
 export const DOWNLOAD_BASE_URL: string =
